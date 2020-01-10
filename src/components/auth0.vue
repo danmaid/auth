@@ -109,7 +109,7 @@ export default {
       return this.auth0Client.getTokenWithPopup(o)
     },
     /** Logs the user out and removes their session on the authorization server */
-    logout(o = window.location.href) {
+    logout(o = { returnTo: window.location.href }) {
       return this.auth0Client.logout(o)
     }
   },
