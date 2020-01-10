@@ -15,9 +15,9 @@
 
 <script>
 import Auth0 from './components/Auth0.vue'
+import google from './components/google.vue'
 
 export default {
-  components: { Auth0 },
   data() {
     return {
       headers: [
@@ -26,7 +26,10 @@ export default {
         { text: 'idToken', value: 'value.idToken' },
         { text: 'action', value: 'component' }
       ],
-      authenticators: [{ component: Auth0, value: {} }]
+      authenticators: [
+        { component: Auth0, value: {} },
+        { component: google, value: {} }
+      ]
     }
   }
 }
