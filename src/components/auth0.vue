@@ -109,8 +109,8 @@ export default {
       return this.auth0Client.getTokenWithPopup(o)
     },
     /** Logs the user out and removes their session on the authorization server */
-    logout(o = { clientId, returnTo: window.location.href }) {
-      return this.auth0Client.logout(o)
+    logout() {
+      return this.auth0Client.logout({ clientId, returnTo: window.location.href })
     }
   },
   /** Use this lifecycle method to instantiate the SDK client */
