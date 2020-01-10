@@ -1,32 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <v-container fluid>
+      <v-data-table :items="authenticators" :headers="headers">
+        <template v-slot:item.value.idToken="{ item }">
+          <pre>{{ JSON.stringify(item.value.idToken, null, 2) }}</pre>
+        </template>
+        <template v-slot:item.component="{ item }">
+          <component :is="item.component" v-model="item.value" />
+        </template>
+      </v-data-table>
+    </v-container>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Auth0 from './components/Auth0.vue'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: { Auth0 },
+  data() {
+    return {
+      headers: [
+        { text: 'id', value: 'value.id' },
+        { text: 'isAuthenticated', value: 'value.isAuthenticated' },
+        { text: 'idToken', value: 'value.idToken' },
+        { text: 'action', value: 'component' }
+      ],
+      authenticators: [{ component: Auth0, value: {} }]
     }
   }
+}
+</script>
+
+<style lang="scss">
+:root {
+  overflow-y: auto;
 }
 </style>
